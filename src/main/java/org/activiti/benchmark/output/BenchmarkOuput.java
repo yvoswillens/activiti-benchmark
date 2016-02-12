@@ -1,4 +1,4 @@
-package be.jorambarrez.activiti.benchmark.output;
+package org.activiti.benchmark.output;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
@@ -34,10 +34,16 @@ public class BenchmarkOuput {
     private ArrayList<BenchmarkResult> results;
 
     public BenchmarkOuput() {
+        this("activiti");
+    }
+
+    public BenchmarkOuput(String benchmarkName) {
         DateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
-        this.folderName = "benchmark_report_" + df.format(new Date());
+
+        this.folderName = "../benchmark_reports/" + df.format(new Date()) +  "_" + benchmarkName;
+
         File folder = new File(folderName);
-        folder.mkdir();
+        folder.mkdirs();
 
         this.strb = new StringBuilder();
         this.results = new ArrayList<BenchmarkResult>();

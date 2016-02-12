@@ -18,7 +18,7 @@
     <manualTask id="passthrough2" />
     <sequenceFlow id="flow3" sourceRef="passthrough2" targetRef="serviceTask" />
 
-    <serviceTask id="serviceTask" activiti:class="be.jorambarrez.activiti.benchmark.delegate.GenerateVariablesDelegate">
+    <serviceTask id="serviceTask" activiti:class="org.activiti.benchmark.delegate.GenerateVariablesDelegate">
       <extensionElements>
         <activiti:field name="numberOfVariablesString" stringValue="4" />
       </extensionElements>

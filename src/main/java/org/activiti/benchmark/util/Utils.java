@@ -1,7 +1,7 @@
-package be.jorambarrez.activiti.benchmark.util;
+package org.activiti.benchmark.util;
 
-import be.jorambarrez.activiti.benchmark.Benchmark;
-import be.jorambarrez.activiti.benchmark.execution.ProcessEngineHolder;
+import org.activiti.benchmark.Benchmark;
+import org.activiti.benchmark.execution.ProcessEngineHolder;
 import org.activiti.engine.repository.Deployment;
 
 import java.util.Random;

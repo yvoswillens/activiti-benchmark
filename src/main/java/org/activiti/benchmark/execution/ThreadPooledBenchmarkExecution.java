@@ -1,12 +1,12 @@
-package be.jorambarrez.activiti.benchmark.execution;
+package org.activiti.benchmark.execution;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import be.jorambarrez.activiti.benchmark.output.BenchmarkResult;
-import be.jorambarrez.activiti.benchmark.util.Utils;
+import org.activiti.benchmark.output.BenchmarkResult;
+import org.activiti.benchmark.util.Utils;
 
 public abstract class ThreadPooledBenchmarkExecution extends BasicBenchmarkExecution {
 

@@ -1,6 +1,6 @@
-package be.jorambarrez.activiti.benchmark.execution;
+package org.activiti.benchmark.execution;
 
-import be.jorambarrez.activiti.benchmark.Benchmark;
+import org.activiti.benchmark.Benchmark;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,7 +18,7 @@ public class ProcessEngineHolder {
 	}
 	
 	private static ProcessEngine getProcessEngine() {
-		if (Benchmark.CONFIGURATION_VALUE.equals("default")) {
+		if ("default".equals(Benchmark.CONFIGURATION_VALUE)) {
 			
 			System.out.println("Using DEFAULT config");
 			// Not doing the 'official way' here, but it is needed if we want
@@ -32,12 +32,12 @@ public class ProcessEngineHolder {
 			System.out.println("driver : " + processEngineConfiguration.getJdbcDriver());
 
 			return processEngineConfiguration.buildProcessEngine();
-		} else if (Benchmark.CONFIGURATION_VALUE.equals("spring")) {
+		} else  {
 			System.out.println("Using SPRING config");
 			APP_CTX = new ClassPathXmlApplicationContext("spring-context.xml");
 			return APP_CTX.getBean(ProcessEngine.class);
 		}
-		throw new RuntimeException("Invalid config: only 'default' and 'spring' are supported");
+//		throw new RuntimeException("Invalid config: only 'default' and 'spring' are supported");
 	}
 	
 	

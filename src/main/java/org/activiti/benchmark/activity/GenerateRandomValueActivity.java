@@ -1,4 +1,4 @@
-package be.jorambarrez.activiti.benchmark.activity;
+package org.activiti.benchmark.activity;
 
 
 

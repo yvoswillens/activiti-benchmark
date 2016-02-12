@@ -1,8 +1,11 @@
-package be.jorambarrez.activiti.benchmark.execution;
+package org.activiti.benchmark.execution;
 
 import java.util.Date;
 import java.util.List;
 
+import org.activiti.benchmark.Benchmark;
+import org.activiti.benchmark.output.BenchmarkResult;
+import org.activiti.benchmark.util.Utils;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RuntimeService;
@@ -12,10 +15,6 @@ import org.activiti.engine.impl.db.DbSqlSession;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.runtime.ProcessInstance;
-
-import be.jorambarrez.activiti.benchmark.Benchmark;
-import be.jorambarrez.activiti.benchmark.output.BenchmarkResult;
-import be.jorambarrez.activiti.benchmark.util.Utils;
 
 /**
  * Basic way of running the benchmark: 1 thread, sequentially executing the

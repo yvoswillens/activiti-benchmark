@@ -1,4 +1,4 @@
-package be.jorambarrez.activiti.benchmark.execution;
+package org.activiti.benchmark.execution;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

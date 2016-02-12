@@ -1,6 +1,6 @@
-package be.jorambarrez.activiti.benchmark.execution;
+package org.activiti.benchmark.execution;
 
-import be.jorambarrez.activiti.benchmark.output.BenchmarkResult;
+import org.activiti.benchmark.output.BenchmarkResult;
 
 /**
  * Interface for running a benchmark for process executions.

@@ -1,4 +1,4 @@
-package be.jorambarrez.activiti.benchmark.delegate;
+package org.activiti.benchmark.delegate;
 
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;

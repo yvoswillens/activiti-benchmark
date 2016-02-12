@@ -1,4 +1,4 @@
-package be.jorambarrez.activiti.benchmark.output;
+package org.activiti.benchmark.output;
 
 import java.util.HashMap;
 import java.util.Map;

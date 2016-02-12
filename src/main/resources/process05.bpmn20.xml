@@ -13,7 +13,7 @@
     <sequenceFlow id="flow1" sourceRef="theStart" targetRef="generateRandomValue" />
   
     <serviceTask id="generateRandomValue" 
-                 activiti:class="be.jorambarrez.activiti.benchmark.activity.GenerateRandomValueActivity"/>
+                 activiti:class="org.activiti.benchmark.activity.GenerateRandomValueActivity"/>
     <sequenceFlow id="flow2" sourceRef="generateRandomValue" targetRef="decideOnValue" />
     
     <exclusiveGateway id="decideOnValue" />
