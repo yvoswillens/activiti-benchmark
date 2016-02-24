@@ -4,7 +4,8 @@ import org.activiti.benchmark.execution.BasicBenchmarkExecution;
 import org.activiti.benchmark.execution.BenchmarkExecution;
 import org.activiti.benchmark.execution.FixedThreadPoolBenchmarkExecution;
 import org.activiti.benchmark.execution.ProcessEngineHolder;
-import org.activiti.benchmark.output.BenchmarkOuput;
+import org.activiti.benchmark.output.BenchmarkCSVOutput;
+import org.activiti.benchmark.output.BenchmarkOutput;
 import org.activiti.benchmark.output.BenchmarkResult;
 import org.activiti.benchmark.util.Utils;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @author jbarrez
  * @author Yvo Swillens
  */
-public abstract class Benchmark {
+public class Benchmark {
 
 	public static String[] PROCESSES = { 
 		"process01",
@@ -59,13 +60,15 @@ public abstract class Benchmark {
 
         String benchmarkName = args[2];
 
-        executeBenchmarks(nrOfExecutions, maxNrOfThreadsInThreadPool, benchmarkName);
+		String startDateTime = args[3];
+
+        executeBenchmarks(nrOfExecutions, maxNrOfThreadsInThreadPool, benchmarkName, startDateTime);
 
         System.out.println("Benchmark completed. Ran for " + ((System.currentTimeMillis() - start) / 1000L) + " seconds");
     }
 
 
-    private static void executeBenchmarks(int nrOfProcessExecutions, int maxNrOfThreadsInThreadPool, String benchmarkName) {
+    private static void executeBenchmarks(int nrOfProcessExecutions, int maxNrOfThreadsInThreadPool, String benchmarkName, String startDateTime) {
 
         // Deploy test processes
         Utils.cleanAndRedeployTestProcesses();
@@ -83,15 +86,15 @@ public abstract class Benchmark {
             fixedPoolSequentialResults.add(fixedPoolBenchMark.sequentialExecution(PROCESSES, nrOfProcessExecutions, HISTORY_ENABLED));
         }
 
-        writeHtmlReport(benchmarkName);
+        writeHtmlReport(benchmarkName, startDateTime);
     }
 
-    private static void writeHtmlReport(String benchmarkName) {
-        BenchmarkOuput output = new BenchmarkOuput(benchmarkName);
-        output.start("Activiti " + ProcessEngineHolder.getInstance().VERSION + " basic benchmark results");
+    private static void writeHtmlReport(String benchmarkName, String folderName) {
+		BenchmarkCSVOutput output = new BenchmarkCSVOutput(benchmarkName, folderName);
+        output.start(ProcessEngineHolder.getInstance().VERSION);
 
         for (int i = 1; i <= maxNrOfThreadsInThreadPool; i++) {
-            output.addBenchmarkResult("Fixed thread pool (" + i + "threads), sequential", fixedPoolSequentialResults.get(i - 1));
+            output.addBenchmarkResult(i, fixedPoolSequentialResults.get(i - 1));
         }
         output.generateChartOfPreviousAddedBenchmarkResults(false);
 
@@ -105,7 +108,7 @@ public abstract class Benchmark {
 	 */
 	protected static boolean readAndValidateParams(String[] args) {
 		// length check
-		if (args.length != 3) {
+		if (args.length != 4) {
 			System.err.println();
 			System.err.println("Wrong number of arguments");
 			System.err.println();

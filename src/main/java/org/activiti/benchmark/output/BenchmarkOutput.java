@@ -25,28 +25,28 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 
-public class BenchmarkOuput {
+public class BenchmarkOutput {
 
-    private String folderName;
-
+    private String baseFolderName;
+    private String benchmarkName;
     private StringBuilder strb;
-
     private ArrayList<BenchmarkResult> results;
+    private static DateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
 
-    public BenchmarkOuput() {
-        this("activiti");
+    public BenchmarkOutput() {
+        this("activiti", df.format(new Date()));
     }
 
-    public BenchmarkOuput(String benchmarkName) {
-        DateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+    public BenchmarkOutput(String benchmarkName, String startDateTime) {
 
-        this.folderName = "../benchmark_reports/" + df.format(new Date()) +  "_" + benchmarkName;
+        this.benchmarkName = benchmarkName;
+        this.baseFolderName = "../benchmark_reports/" + startDateTime;
 
-        File folder = new File(folderName);
+        File folder = new File(baseFolderName);
         folder.mkdirs();
 
         this.strb = new StringBuilder();
-        this.results = new ArrayList<BenchmarkResult>();
+        this.results = new ArrayList<>();
     }
 
     public void start(String outputTitle) {
@@ -237,7 +237,7 @@ public class BenchmarkOuput {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_SSS");
         String chartFileName = "chart-" + dateFormat.format(new Date()) + ".png";
         try {
-            fos = new FileOutputStream(new File(folderName + "/" + chartFileName));
+            fos = new FileOutputStream(new File(baseFolderName + "/" + chartFileName));
             ChartUtilities.writeChartAsPNG(fos, chart, 1200, 1200);
         } catch (IOException e) {
             e.printStackTrace();
@@ -273,7 +273,7 @@ public class BenchmarkOuput {
 
         BufferedWriter writer = null;
         try {
-            String outputFile = folderName + "/benchmark_report.html";
+            String outputFile = baseFolderName + "/"+benchmarkName+"_benchmark_report.html";
             writer = new BufferedWriter(new FileWriter(new File(outputFile)));
             writer.write(strb.toString());
             System.out.println("Benchmark report written to " + outputFile);

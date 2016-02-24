@@ -4,13 +4,10 @@ import org.activiti.benchmark.execution.BasicBenchmarkExecution;
 import org.activiti.benchmark.execution.BenchmarkExecution;
 import org.activiti.benchmark.execution.FixedThreadPoolBenchmarkExecution;
 import org.activiti.benchmark.execution.ProcessEngineHolder;
-import org.activiti.benchmark.output.BenchmarkOuput;
-import org.activiti.benchmark.output.BenchmarkResult;
+import org.activiti.benchmark.output.BenchmarkOutput;
 import org.activiti.benchmark.util.Utils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Main class that contains the logic to execute the benchmark.
@@ -20,7 +17,7 @@ import java.util.List;
  */
 public class BenchmarkRandom extends Benchmark {
 
-	protected static void executeBenchmarks(int nrOfProcessExecutions, int maxNrOfThreadsInThreadPool, String benchmarkName) {
+	protected static void executeBenchmarks(int nrOfProcessExecutions, int maxNrOfThreadsInThreadPool, String benchmarkName, String startDateTime) {
 
 		// Deploy test processes
 		Utils.cleanAndRedeployTestProcesses();
@@ -38,11 +35,11 @@ public class BenchmarkRandom extends Benchmark {
             fixedPoolRandomResults.add(fixedPoolBenchMark.randomExecution(PROCESSES, nrOfProcessExecutions, HISTORY_ENABLED));
         }
 
-		writeHtmlReport(benchmarkName);
+		writeHtmlReport(benchmarkName,startDateTime);
 	}
 
-	protected static void writeHtmlReport(String benchmarkName) {
-		BenchmarkOuput output = new BenchmarkOuput(benchmarkName);
+	protected static void writeHtmlReport(String benchmarkName, String startDateTime) {
+		BenchmarkOutput output = new BenchmarkOutput(benchmarkName, startDateTime);
 		output.start("Activiti " + ProcessEngineHolder.getInstance().VERSION + " basic benchmark results");
 
 		for (int i = 1; i <= maxNrOfThreadsInThreadPool; i++) {
